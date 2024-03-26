@@ -8,38 +8,34 @@ st.set_page_config(page_title="File upload with checkbox", page_icon = ":chart_w
 
 sidebar_menu()
 
-file = st.file_uploader("Choose a file")
+st.header("Upload file", divider = True)
 
 def store_df_in_session(file):
     df = pd.read_csv(file)
     if 'df' not in st.session_state:
         st.session_state.df = df
-    
-
-if file is not None: 
-    store_df_in_session(file)
-    
-    df = st.session_state.df
-    st.write(df)
-    # dataframe = load_data()
-    
-    # df = dataframe.set_index('date', inplace=True)
 
 
-    # st.header(f"INDEX: \n {dataframe.index}")
+use_default_data = st.checkbox('Use default data', value=True)
 
-    # st.header("DATAFRAME: ")
-    # st.write(dataframe)
-    
-    # selected = st.multiselect(
-    # "Select columns", 
-    # dataframe.columns.values)
+if use_default_data:
+    df = pd.read_csv("./data/all_stocks_5yr.csv")
+else:        
+    file = st.file_uploader("Choose a file")
+    df = store_df_in_session(file)
 
-    # if selected:
-    #     st.dataframe(dataframe[selected])
+
+if df is not None: 
+    #df = dataframe.set_index('date', inplace=True)
     
-else:
-    st.write("DF not loaded")    
+    selected = st.multiselect(
+    "Select columns to display", 
+    placeholder="No columns selected",
+    options = df.columns.values)
+
+    if selected:
+        st.dataframe(df[selected])
+    
 
 
      

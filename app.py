@@ -6,12 +6,18 @@ st.set_page_config(page_title="Stock Predictor Website", page_icon = ":chart_wit
 
 sidebar_menu()
 
-st.subheader("Stock Predictor Website")
+st.header("Stock Predictor Website", divider = True)
 
-st.write("[Link](google.com)")
+st.subheader("Pages: ")
 
-with st.echo(code_location="above"):
-    st.write("Check")
+st.markdown(
+"""
+- Main page
+- See stocks
+- Load data
+- Compare models
+"""
+)
 
 
 

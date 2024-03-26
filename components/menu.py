@@ -14,13 +14,9 @@ def sidebar_menu():
         st.page_link("./app.py", label="Main page", icon = "🏠")
 
       
-        st.page_link("./pages/stock.py", label="Stocks", icon="📈")
-        st.page_link("./pages/file_upload.py", label="📄 File Upload")
-        st.page_link("./pages/compare.py", label="🥼 Compare")
-
-        
-        with st.spinner("Loading..."):
-            st.success("Done!")
+        st.page_link("./pages/stock.py", label="See stocks", icon="📈")
+        st.page_link("./pages/file_upload.py", label="📄 Load data")
+        st.page_link("./pages/compare.py", label="🥼 Compare models")
 
         image_links()  
 
@@ -29,11 +25,8 @@ def sidebar_menu():
 def image_links():
     with st.sidebar:
         #c, col1, _ = st.columns(spec = [2, 1, 2], gap="large")
-        c , col1, d = st.columns(3)
-        with c:
-            st.write(123)
-            pass
-
+        _ , col1, _ = st.columns(3)
+    
         with col1:
             st.sidebar.markdown(
             """
@@ -44,9 +37,6 @@ def image_links():
             </a>
             """, unsafe_allow_html=True
             )
-
-        with d:
-            st.write(00)
 
 def icon_links():
      with st.sidebar:

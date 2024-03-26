@@ -23,27 +23,38 @@ else:
 if df is not None:
     st.caption("Dataframe loaded sucesfully")
     
-    n_columns = st.select_slider(label = "Select the number of models to compare", options = (1, 2, 3, 4))
-
-    st.subheader(f"Number of colums: {n_columns}")
+    # Select time
+    # TODO read the time limits from the data
     
-
+    st.subheader("Select time perioid", divider=True)
+    start_date_col, end_date_col = st.columns(2)
+    
+    start_date = start_date_col.date_input(label="Select start date")
+    
+    end_date = end_date_col.date_input(label="Select end date")    
+    
+    
+    # Columns
+    st.subheader("Select models", divider=True)
+    n_columns = st.select_slider(label = "Select the number of models to compare", options = (1, 2, 3, 4))    
     columns_list = st.columns(n_columns)
     models = [None] * len(columns_list)
     
     for index, column in enumerate(columns_list):
-        column.subheader(f"Col number: {index + 1}")
+        column.subheader(f"Model {index + 1}")
         models[index] = column.selectbox(label="Select model", 
                          options=["ARIMA", "VAR", "RNN", "LSTM"], 
                          placeholder ="No model selected",
                          index=None,
                          key=index)
         
-    if st.button(label="Train models", type="primary"):
+    # Train models button     
+    if st.button(label="Train models", type="secondary", use_container_width=True):
         with st.spinner('Training the models...'):
             time.sleep(1)
             st.toast('Models trained succesfully!', icon="✅")
             for index, column in enumerate(columns_list):
+                column.divider()
                 column.write(f"Model trained: {models[index]}")
             
 else: 
