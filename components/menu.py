@@ -16,8 +16,7 @@ def sidebar_menu():
       
         st.page_link("./pages/stock.py", label="Stocks", icon="📈")
         st.page_link("./pages/file_upload.py", label="📄 File Upload")
-        st.page_link("./pages/experiment.py", label="Experiment")
-        st.page_link("./pages/compare.py", label="Compare")
+        st.page_link("./pages/compare.py", label="🥼 Compare")
 
         
         with st.spinner("Loading..."):

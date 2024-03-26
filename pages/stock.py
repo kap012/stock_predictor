@@ -68,8 +68,8 @@ with arima:
             with st.spinner('Training the model...'):
                 result = run_arima(data, split, lag_order, diff_degree, ma_window)
                 #result = data.iloc[int(len(data) * split):len(data)]
-                st.balloons()
-                st.toast('This is a success message!', icon="✅")
+                # st.balloons()
+                st.toast('Model trained successfully!', icon="✅")
                 st.session_state.processed[key] = result
         
     

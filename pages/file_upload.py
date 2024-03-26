@@ -10,15 +10,14 @@ sidebar_menu()
 
 file = st.file_uploader("Choose a file")
 
-
-if file is not None:
-    
+def store_df_in_session(file):
     df = pd.read_csv(file)
     if 'df' not in st.session_state:
         st.session_state.df = df
-
+    
 
 if file is not None: 
+    store_df_in_session(file)
     
     df = st.session_state.df
     st.write(df)
