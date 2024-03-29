@@ -2,20 +2,11 @@ import streamlit as st
 from .markdown import hyperlinked_img_to_html
 
 def sidebar_menu():
-    # st.sidebar.page_link("./app.py", label="Main page", icon = "👈")
-    # st.sidebar.page_link("./pages/stock_price_graph.py", label="Stock Price Graph")
-    # st.sidebar.page_link("./pages/plotting_demo.py", label="Plotting Demo")
-    # st.sidebar.page_link("./pages/write_stream.py", label="Write Stream Demo")
-    # st.sidebar.success("Select a demo above.")
-
-
     with st.sidebar:
-
         st.page_link("./app.py", label="Main page", icon = "🏠")
-
-      
         st.page_link("./pages/stock.py", label="See stocks", icon="📈")
         st.page_link("./pages/file_upload.py", label="📄 Load data")
+        st.page_link("./pages/inspect.py", label="🔎 Data inspection")
         st.page_link("./pages/compare.py", label="🥼 Compare models")
 
         image_links()  
