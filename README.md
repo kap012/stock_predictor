@@ -1,6 +1,6 @@
 # stock_predictor
 
-To run in `localhost8501`:
+To run on `localhost:8501`:
 ``` 
 make run
 ```

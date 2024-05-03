@@ -8,6 +8,6 @@ def persistence_column_view(dict_name, col_idx):
                                          help="Shift help",
                                          key=f"shift_col_{col_idx}",
                                          min_value=1,
-                                         max_value=10,
+                                         max_value=5,
                                          value = 1)
  

@@ -42,7 +42,7 @@ with model_tab:
     selected_column = select_column(df, proces_id=process_id)
     
     cols = st.columns(2)
-    shift = cols[0].number_input('Data shift', help="Shift help", min_value=1, max_value=10, value = 1)
+    shift = cols[0].number_input('Data shift', help="Shift help", min_value=1, max_value=5, value = 1)
     split = cols[1].number_input('Train/Test split',help="Train/Test split help", min_value=0.0, max_value=1.0, step=0.01, value = 0.66)
 
 

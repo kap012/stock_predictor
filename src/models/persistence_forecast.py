@@ -8,7 +8,7 @@ def model_persistence(x):
     return x
 
 
-def run_persistence_forecast(data: pd.DataFrame, split: float, shift = 1) -> pd.Series:
+def run_persistence_forecast(data: pd.DataFrame, split: float, shift ) -> pd.Series:
     test_df = get_test_subset(data, split)
     
     
@@ -17,10 +17,10 @@ def run_persistence_forecast(data: pd.DataFrame, split: float, shift = 1) -> pd.
     predictions = []
     
     for i in range(len(test_values)):
-        if i == 1:
+        if i == 0:
             pred = model_persistence(test_values[i])
         else:
-            pred = model_persistence(test_values[i-1])
+            pred = model_persistence(test_values[i-shift])
 
         predictions.append(pred)
     
