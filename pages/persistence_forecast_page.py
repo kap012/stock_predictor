@@ -58,59 +58,46 @@ with model_tab:
     
     
     if prediction_series is None:
-        st.caption('Press "Train" to see the results')
-        st.stop()
+        st.caption('Press the button to see the results')
+     
 
 
+    if prediction_series is not None:
+        # DATAFRAMES
+        test_set = get_test_subset(data_between_dates[selected_column], split=split)
+        comparison_df = get_comparison_df(test_set=test_set, forecast=prediction_series)
+        dataframes_expander(comparison_df)
     
-    # DATAFRAMES
-    test_set = get_test_subset(data_between_dates[selected_column], split=split)
-    comparison_df = get_comparison_df(test_set=test_set, forecast=prediction_series)
-    dataframes_expander(comparison_df)
-  
 
-        
+            
 
-    # GRAPHING
-    with st.expander("Graphs", expanded=False):
-        st.caption(f"Note that the {shift} value(s) at the start of the prediction isn't there as in the test set there's no previous data in the test set")
-        layout = go.Layout(
-                # paper_bgcolor='rgba(164, 172, 231, 0.8)',
-                # plot_bgcolor='rgba(0,0,0,0)'
-            )
-        res_fig = go.Figure(layout=layout)
-        
-        test_fig = go.Figure(layout=layout)
-        
-        test_fig.add_trace(go.Scatter(x=data_between_dates.index,
-                                    y=data_between_dates[selected_column].values,
-                                
+        # GRAPHING
+        with st.expander("Graphs", expanded=False):
+            st.caption(f"Note that the {shift} value(s) at the start of the prediction isn't there as in the test set there's no previous data in the test set")
+            layout = go.Layout(
+                    # paper_bgcolor='rgba(164, 172, 231, 0.8)',
+                    # plot_bgcolor='rgba(0,0,0,0)'
+                )
+            res_fig = go.Figure(layout=layout)
+            
+            test_fig = go.Figure(layout=layout)
+            
+            test_fig.add_trace(go.Scatter(x=data_between_dates.index,
+                                        y=data_between_dates[selected_column].values,
+                                    
+                                        mode='lines',
+                                        name='Actual'))
+            
+            test_fig.add_trace(go.Scatter(x=prediction_series.index    ,
+                                    y=prediction_series.values,
+                                    line_color="red",
                                     mode='lines',
-                                    name='Actual'))
-        
-        test_fig.add_trace(go.Scatter(x=prediction_series.index    ,
-                                y=prediction_series.values,
-                                line_color="red",
-                                mode='lines',
-                                name='Prediction'))
-        
-        st.plotly_chart(test_fig, use_container_width=True)
+                                    name='Prediction'))
+            
+            st.plotly_chart(test_fig, use_container_width=True)
 
 
 
-        
-    with st.expander("Error metrics", expanded=False):
-
-
-        error_cols = st.columns(2)
-        
-        rmse_result = rmse(test_set[shift:], prediction_series)
-        rmse_rounded = round(rmse_result, 3)
-        error_cols[0].metric(label="RMSE", value=rmse_rounded)
-        
-        mape_result = mean_absolute_percentage_error(test_set[shift:], prediction_series)
-        mape_rounded = round(mape_result, 3)
-        error_cols[1].metric(label="MAPE", value=mape_rounded)
-
+        errors_expander(test_set, prediction_series)
 
             

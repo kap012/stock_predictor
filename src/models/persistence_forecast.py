@@ -1,6 +1,7 @@
 import pandas as pd
 from src.calculations.train_test_split import get_test_subset, get_train_subset
 import streamlit as st
+import math
 
 def model_persistence(x):
     # return the current value as the prediction for the next value
@@ -8,27 +9,23 @@ def model_persistence(x):
 
 
 def run_persistence_forecast(data: pd.DataFrame, split: float, shift = 1) -> pd.Series:
-    
-    train_df = get_train_subset(data, split)
     test_df = get_test_subset(data, split)
     
     
-    forecast_series = pd.Series(name='persistence_forecast')
-    
-    test_values = train_df.values
+    test_values = test_df.values
 
-    for i in range(shift, len(test_values)):
-        last_actual = test_values[i - 1]
-        
-        forecast_value = model_persistence(last_actual)
-       
-        forecasted_idx = test_df.index[i - shift - 1]
-        st.write(forecasted_idx)
-        
-        forecast_series[forecasted_idx] =  forecast_value
-        
-        #st.write(test_df.index[i+shift])
-        
-        #forecast_series[test_df.index[i+shift]] = yhat
+    predictions = []
+    
+    for i in range(len(test_values)):
+        if i == 1:
+            pred = model_persistence(test_values[i])
+        else:
+            pred = model_persistence(test_values[i-1])
+
+        predictions.append(pred)
+    
+    forecast_series = pd.Series(name='persistence_forecast',
+                                data=predictions,
+                                index=test_df.index)
         
     return forecast_series

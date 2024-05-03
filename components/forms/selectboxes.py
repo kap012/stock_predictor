@@ -3,6 +3,7 @@ import pandas as pd
 
 def select_column(df: pd.DataFrame, proces_id: str):
     column_name = st.selectbox(label='Select the column:',
+                                    placeholder="Select a column",
                                     key = f"{proces_id}_select_column",
                                     options=df.columns,
                                     index=None

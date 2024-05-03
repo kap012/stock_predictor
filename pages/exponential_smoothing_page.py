@@ -15,7 +15,7 @@ from components.forms.selectboxes import select_column
 
 
 page_name = "Exponential smoothing"
-st.set_page_config(page_title="ARIMA", page_icon = ":chart_with_upwards_trend:", layout="wide")
+st.set_page_config(page_title="Exponential Smoothing", page_icon = ":chart_with_upwards_trend:", layout="wide")
 
 init_processing_state(page_name)
 init_data()
@@ -34,10 +34,9 @@ with info_tab:
 with model_tab:
     df = st.session_state.df
     
-    input_cols = st.columns(2)
-
     data_between_dates = data_between_dates_form(data=df, process_id=page_name)
-    
+
+    input_cols = st.columns(2)    
     smoothing_level = input_cols[0] .number_input('Smoothiing level',
                                             help="The alpha parameter of the model",
                                             min_value=0.0, 
@@ -70,7 +69,7 @@ with model_tab:
 
     
     if prediction_series is None:
-        st.caption("Press the Process button to see the results")
+        st.caption("Press the button to see the results")
     else:    
         test_set = get_test_subset(data_between_dates[selected_column], split)
         

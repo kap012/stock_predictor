@@ -6,7 +6,7 @@ import plotly.graph_objects as go
 from src.app_logic.data_util import init_data
 from components.forms.selectboxes import select_column
 
-st.set_page_config(page_title="Inspect", page_icon = ":chart_with_upwards_trend:", layout="wide")
+st.set_page_config(page_title="Inspect Data", page_icon = ":chart_with_upwards_trend:", layout="wide")
 
 
 init_data()

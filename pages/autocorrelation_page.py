@@ -58,7 +58,6 @@ with acf_tab:
         
     cancel_submit_button(process_id=ar_process_key)
         
-        #         st.caption("Press the button to see the reults")
 
     if acf_result is not None:
 
